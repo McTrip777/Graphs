@@ -52,14 +52,16 @@ class Graph:
 
 # --------------------------------------------------------------------
 
-    def dft_recursive(self, starting_vertex, visited = None):
-        if visited == None:
+    def dft_recursive(self, starting_vertex, visited=None):
+        if visited is None:
             visited = set()
-        visited.add(starting_vertex)
-        for child_vert in self.vertices[starting_vertex]:
-            if child_vert not in visited:
+        if starting_vertex not in visited:
+            print(starting_vertex)
+            visited.add(starting_vertex)
+            for child_vert in self.vertices[starting_vertex]:
                 self.dft_recursive(child_vert, visited)
-        return visited
+        
+        
 # --------------------------------------------------------------------
 
     def bfs(self, starting_vertex, destination_vertex):
@@ -127,7 +129,7 @@ if __name__ == '__main__':
     Should print:
         {1: {2}, 2: {3, 4}, 3: {5}, 4: {6, 7}, 5: {3}, 6: {3}, 7: {1, 6}}
     '''
-    print(graph.vertices)
+    # print(graph.vertices)
 
     '''
     Valid DFT paths:
@@ -136,7 +138,7 @@ if __name__ == '__main__':
         1, 2, 4, 7, 6, 3, 5
         1, 2, 4, 6, 3, 5, 7
     '''
-    print('DFT',graph.dft(1))
+    # print('DFT',graph.dft(1))
 
     '''
     Valid BFT paths:
@@ -153,7 +155,7 @@ if __name__ == '__main__':
         1, 2, 4, 3, 7, 6, 5
         1, 2, 4, 3, 7, 5, 6
     '''
-    print('BFT', graph.bft(1))
+    # print('BFT', graph.bft(1))
 
     '''
     Valid DFT recursive paths:
@@ -162,17 +164,16 @@ if __name__ == '__main__':
         1, 2, 4, 7, 6, 3, 5
         1, 2, 4, 6, 3, 5, 7
     '''
-    print('DFT R',graph.dft_recursive(1))
-
+    graph.dft_recursive(1)
     '''
     Valid BFS path:
         [1, 2, 4, 6]
     '''
-    print('BFS',graph.bfs(1, 6))
+    # print('BFS',graph.bfs(1, 6))
 
     '''
     Valid DFS paths:
         [1, 2, 4, 6]
         [1, 2, 4, 7, 6]
     '''
-    print('DFS',graph.dfs(1, 6))
+    # print('DFS',graph.dfs(1, 6))
