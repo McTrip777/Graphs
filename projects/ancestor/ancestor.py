@@ -11,9 +11,6 @@ class Stack():
     def size(self):
         return len(self.stack)
 
-
-
-
 class Graph():
     def __init__(self):
         self.vertices = {}
@@ -37,7 +34,8 @@ class Graph():
     def earliest_ancestor(self, start):
         stack = Stack()
         stack.push([start])
-        visited = []
+        visited = set()
+        new_path = None
         while stack.size() > 0:
             path = stack.pop()
             node = path[-1]
@@ -47,10 +45,10 @@ class Graph():
                     new_path = path.copy()
                     new_path.append(next_node)
                     stack.push(new_path)
-        return None
-
-
-
+        if new_path == None:
+            return -1
+        else:
+            return new_path[-1]
 
 if __name__ == '__main__':
     graph = Graph()
@@ -77,5 +75,5 @@ if __name__ == '__main__':
     graph.add_edge(8, 9)
 
 print("")
-print(graph.earliest_ancestor(6))
+print(graph.earliest_ancestor(5))
 print("")
