@@ -1,3 +1,5 @@
+import random
+
 class Queue:
     def __init__(self):
         self.queue = []
@@ -10,7 +12,7 @@ class Queue:
 # ---------------------------------------------------------------------------
 
     def dequeue(self):
-        if (self.size) > 0:
+        if (self.size()) > 0:
             return self.queue.pop(0)
         else:
             return None
@@ -65,22 +67,26 @@ class SocialGraph:
             for friendID in range(userID +1, self.lastID +1):
                 possibleFriendships.append((userID, friendID))
         random.shuffle(possibleFriendships)
-        x = 0
-        for i in range(0, (numUsers * avgFriendships // 2))
+        for i in range(0, (numUsers * avgFriendships // 2)):
+            friendship = possibleFriendships[i]
+            self.addFriendship(friendship[0], friendship[1])
 
 # ---------------------------------------------------------------------------
 
     def getAllSocialPaths(self, userID):
-        """
-        Takes a user's userID as an argument
-
-        Returns a dictionary containing every user in that user's
-        extended network with the shortest friendship path between them.
-
-        The key is the friend's ID and the value is the path.
-        """
-        visited = {}  # Note that this is a dictionary, not a set
-        # !!!! IMPLEMENT ME
+        visited = {}
+        q = Queue()
+        q.enqueue([userID])
+        while q.size() > 0:
+            path = q.dequeue()
+            newUserID = path[-1]
+            if newUserID not in visited:
+                visited[newUserID] = path
+                for friendID in self.friendships[newUserID]:
+                    if friendID not in visited:
+                        new_path = list(path)
+                        new_path.append(friendID)
+                        q.enqueue(new_path)
         return visited
 
 # ---------------------------------------------------------------------------
@@ -91,3 +97,16 @@ if __name__ == '__main__':
     print(sg.friendships)
     connections = sg.getAllSocialPaths(1)
     print(connections)
+
+
+
+
+'''
+                 1
+               /  \
+             10    2
+            / \   / \
+           9   7 3   6
+                      \
+                       8
+'''
