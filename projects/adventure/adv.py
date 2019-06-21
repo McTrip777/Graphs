@@ -49,13 +49,13 @@ def dft(world, start):
         exits = room.getExits()
         
         # will contain the paths of the direction of the start
-        next_paths = []
-
+        nextPath = []
+        # print(visited[roomID])
         # if room isn't starting room 
         if visited[roomID] is not 'true':
             # append all other room directions
             traversalPath.append(visited[roomID])
-        
+            # print(traversalPath)
         for direction in exits:
             # moves through every room and records the adjacent room numbers
             next_room = room.getRoomInDirection(direction).id
@@ -69,13 +69,13 @@ def dft(world, start):
                 # print(new_path, 'new')
 
                 #creates lists of the rooms visited 
-                next_paths.append(new_path)
-                # print(next_paths, 'next')
-                # print(next_paths, '1')
-        if len(next_paths):
-            stack += next_paths
-            print(next_paths)
-            print(stack, 'stack')
+                nextPath.append(new_path)
+                # print(nextPath, 'next')
+                # print(nextPath, '1')
+        if len(nextPath):
+            stack += nextPath
+            # print(nextPath)
+            # print(stack, 'stack')
             # print(stack)
         elif len(stack):
             # while the path doesn't equal the last value of the last array 
@@ -98,68 +98,6 @@ def dft(world, start):
                 traversalPath.append(previous)
                 # print(traversalPath)
 dft(world, world.startingRoom.id)
-
-# def opp_directions(direction):
-#     if direction is 'n' or direction is 'N':
-#         return 's'
-#     elif direction is 's' or direction is 'S':
-#         return 'n'
-#     elif direction is 'e' or direction is 'E':
-#         return 'w'
-#     elif direction is 'w' or direction is 'W':
-#         return 'e'
-#     else:
-#         return f"I didn't understand that"
-
-# traversalPath = []
-# entered = {}
-# roomsSearched = []
-# # takes current room and applies all exits to it
-# entered[player.currentRoom.id] = player.currentRoom.getExits()
-
-# # as long as the length of entered is less than roomGraph 
-# # still rooms not counted, continue loop
-# # print(player.currentRoom.id)
-# # print(entered)
-# while len(entered) <= 498:
-
-#     # if current location ID is not in entered, run if statement
-#     if player.currentRoom.id not in entered:
-#         # entered room ID += all exits for the current room ['n', 's', 'e', 'w']
-#         entered[player.currentRoom.id] = player.currentRoom.getExits()
-        
-#         # removes a directional path of the current room
-#         entered[player.currentRoom.id].remove(roomsSearched[-1]) 
-#         # print(roomsSearched)
-#         # print(entered)
-#         # print(len(entered[player.currentRoom.id]))
-
-#     # while directions list length is 0 (aka dead end) and path length of rooms being checked is greater than 0 (not at the starting point)
-#     while len(entered[player.currentRoom.id]) is 0 and len(roomsSearched) > 0:
-
-#         # pops each value of rooms checked to reverse
-#         reverse = roomsSearched.pop()
-#         # print(reverse)
-#         # appends the values of the checked rooms to the main array
-#         traversalPath.append(reverse)
-
-#         # returns the player to the first index
-#         player.travel(reverse)
-
-#     # currentRoomDir stores the location of the current room direction
-#     # print(player.currentRoom.id)
-#     if entered[player.currentRoom.id] :   
-#         currentRoomDir = entered[player.currentRoom.id].pop(0)
-        
-#         # current room direction gets passed into opp_directions and returns the opposite direction
-#         roomsSearched.append(opp_directions(currentRoomDir))
-
-#         # appends the path of the player to the traversalPath
-#         traversalPath.append(currentRoomDir)
-
-#         # keeps track of the players current room ID
-#         player.travel(currentRoomDir)
-
 
 # TRAVERSAL TEST
 visited_rooms = set()
