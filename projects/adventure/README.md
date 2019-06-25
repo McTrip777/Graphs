@@ -48,6 +48,7 @@ If all paths have been explored, you're done!
 ## Minimum Viable Product
 
 * __1__: Tests do not pass
+* __1.5__: Tests pass with `len(traversalPath) >= 2000`
 * __2__: Tests pass with `len(traversalPath) < 2000`
 * __3__: Tests pass with `len(traversalPath) < 1000`
 
